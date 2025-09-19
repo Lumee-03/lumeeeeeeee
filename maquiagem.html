@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lume</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+  <!-- Cabeçalho -->
+  <header class="w-full shadow-md">
+    <div class="flex items-center justify-between px-6 py-4">
+      <!-- Logo -->
+      <div class="text-2xl font-bold text-pink-500">Lume</div>
+
+      <!-- Barra de pesquisa -->
+      <div class="flex-1 mx-6">
+        <input 
+          type="text" 
+          placeholder="Buscar produtos..." 
+          class="w-full border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
+        >
+      </div>
+
+      <!-- Atendimento e Carrinho com ícone -->
+      <div class="flex items-center space-x-6 text-gray-600">
+        <a href="#" class="flex items-center gap-1 hover:text-pink-500 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636a9 9 0 11-12.728 0M12 3v4m0 10v4m-6-6h4m10 0h-4"/>
+          </svg>
+          Atendimento
+        </a>
+
+        <a href="carrinho.html" class="relative flex items-center gap-1 hover:text-pink-500 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+          </svg>
+          Carrinho
+          <span id="cart-count" class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Menu -->
+    <nav class="flex justify-center space-x-6 bg-pink-50 py-3 text-gray-700 font-medium">
+      <button onclick="toggleSidebar()" class="hover:text-pink-500 transition font-semibold">Ver Tudo</button>
+      <a href="index.html" class="hover:text-pink-500 transition">Início</a>
+      <a href="cabelo.html" class="hover:text-pink-500 transition">Cabelos</a>
+      <a href="maquiagem.html" class="hover:text-pink-500 transition">Maquiagens</a>
+      <a href="perfumes.html" class="hover:text-pink-500 transition">Perfumes</a>
+      <a href="skincare.html" class="hover:text-pink-500 transition">Skincare</a>
+    </nav>
+  </header>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50 overflow-y-auto">
+    <div class="flex justify-between items-center px-4 py-4 border-b">
+      <span class="font-bold text-lg">Menu Completo</span>
+      <button onclick="toggleSidebar()" class="text-gray-600 hover:text-pink-500">&times;</button>
+    </div>
+    <ul class="p-4 space-y-2">
+      <li>
+        <button class="w-full text-left font-medium hover:text-pink-500" onclick="toggleSubmenu('cabelos')">Cabelos</button>
+        <ul id="cabelos" class="pl-4 mt-2 hidden space-y-1 text-gray-600">
+          <li><a href="shampoo.html" class="hover:text-pink-500">Shampoos</a></li>
+          <li><a href="condicionador.html" class="hover:text-pink-500">Condicionadores</a></li>
+          <li><a href="mascara.html" class="hover:text-pink-500">Máscaras</a></li>
+        </ul>
+      </li>
+      <li>
+        <button class="w-full text-left font-medium hover:text-pink-500" onclick="toggleSubmenu('maquiagens')">Maquiagens</button>
+        <ul id="maquiagens" class="pl-4 mt-2 hidden space-y-1 text-gray-600">
+          <li><a href="batom.html" class="hover:text-pink-500">Batom</a></li>
+          <li><a href="base.html" class="hover:text-pink-500">Base</a></li>
+          <li><a href="sombra.html" class="hover:text-pink-500">Sombras</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Conteúdo -->
+  <main class="max-w-6xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Produtos para maquiagens</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+      <!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+
+      <!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+		
+		<!-- Produto 1 -->
+        <div class="min-w-[25%] p-2">
+          <div class="border rounded-xl shadow p-4 bg-white flex flex-col justify-between h-full">
+            <img src="wella1.jpg" class="w-full h-[200px] object-contain rounded-lg mb-4 bg-gray-100">
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-700 text-lg mb-1">Produto 1</h3>
+              <p class="text-gray-500 text-sm mb-2">Descrição curta do produto.</p>
+            </div>
+            <p class="text-[#d946ef] font-bold text-lg mb-2">R$ 49,90</p>
+            <div class="flex items-center gap-2">
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',true)"
+                class="flex-1 bg-[#d946ef] text-white text-center py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+              <button onclick="addToCart('Produto 1',49.90,'Descrição curta do produto','https://via.placeholder.com/300x300?text=Produto+1',false)"
+                class="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13l-1.5-7M7 13h10M10 21a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/>
+                </svg>
+              </button>
+            </div>
+			<button onclick="openModal(
+  'Shampoo Revitalizante',
+  [
+    'wella1.jpg',
+    'wella2.jpg',
+    'wella3.jpg'
+  ],
+  'Descrição completa do shampoo com todos os detalhes...',
+  59.90
+)" 
+class="text-sm font-medium text-pink-500 hover:underline">
+  Ver mais sobre o produto
+</button>
+
+          </div>
+        </div>
+
+    </div>
+  </main>
+
+  <!-- Modal -->
+<div id="product-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+  <div class="bg-white rounded-2xl max-w-lg w-full p-6 relative shadow-lg flex flex-col">
+    <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+    
+    <!-- Carrossel de Imagens -->
+    <div class="relative mb-4">
+      <img id="modal-image" src="" class="w-full max-h-[350px] object-contain rounded-lg mx-auto">
+      <button onclick="prevModalImage()" class="absolute top-1/2 left-2 -translate-y-1/2 bg-white bg-opacity-70 px-2 py-1 rounded-full shadow">⟨</button>
+      <button onclick="nextModalImage()" class="absolute top-1/2 right-2 -translate-y-1/2 bg-white bg-opacity-70 px-2 py-1 rounded-full shadow">⟩</button>
+    </div>
+
+    <!-- Conteúdo -->
+    <h3 id="modal-title" class="text-xl font-bold text-gray-800 mb-2"></h3>
+    <div id="modal-description" class="text-gray-600 mb-4 max-h-40 overflow-y-auto"></div>
+    <p id="modal-price" class="text-pink-600 font-bold text-lg mb-4"></p>
+    <button id="modal-buy" class="w-full bg-pink-500 text-white py-2 rounded-lg hover:bg-pink-600 transition font-medium">Comprar</button>
+  </div>
+</div>
+
+  <!-- Rodapé -->
+  <footer class="bg-pink-50 mt-12">
+    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between gap-8">
+      <div class="flex flex-col gap-2">
+        <h3 class="font-bold text-gray-700 mb-2">Lume</h3>
+        <a href="#" class="text-gray-600 hover:text-pink-500 transition">Sobre Nós</a>
+        <a href="#" class="text-gray-600 hover:text-pink-500 transition">Contato</a>
+        <a href="#" class="text-gray-600 hover:text-pink-500 transition">Política de Privacidade</a>
+      </div>
+      <div class="flex flex-col gap-2">
+        <h3 class="font-bold text-gray-700 mb-2">Siga-nos</h3>
+        <div class="flex gap-4">
+          <a href="#" class="text-gray-600 hover:text-pink-500 transition">Instagram</a>
+          <a href="#" class="text-gray-600 hover:text-pink-500 transition">Facebook</a>
+          <a href="#" class="text-gray-600 hover:text-pink-500 transition">Twitter</a>
+        </div>
+      </div>
+    </div>
+    <div class="bg-pink-100 text-gray-600 text-center py-4 mt-6 text-sm">
+      &copy; 2025 Lume. Todos os direitos reservados.
+    </div>
+  </footer>
+
+<script>
+  // Atualiza contador do carrinho
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalQuantity = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
+    document.getElementById('cart-count').innerText = totalQuantity;
+  }
+
+  // Adicionar ao carrinho
+  function addToCart(name, price, description, image, redirect) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existing = cart.find(p => p.name === name);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({ name, price, description, image, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    if (redirect) window.location.href = "carrinho.html";
+  }
+  
+   // Sidebar
+  function toggleSidebar(){document.getElementById('sidebar').classList.toggle('-translate-x-full');}
+  function toggleSubmenu(id){document.getElementById(id).classList.toggle('hidden');}
+
+  // Modal dinâmico
+  function openModal(name, image, description, price) {
+    document.getElementById("modal-title").innerText = name;
+    document.getElementById("modal-image").src = image;
+    document.getElementById("modal-description").innerText = description;
+    document.getElementById("modal-price").innerText = `R$ ${price.toFixed(2)}`;
+    document.getElementById("modal-buy").onclick = function() {
+      addToCart(name, price, description, image, true);
+    };
+    document.getElementById("product-modal").classList.remove("hidden");
+    document.getElementById("product-modal").classList.add("flex");
+  }
+
+  function closeModal() {
+    document.getElementById("product-modal").classList.add("hidden");
+    document.getElementById("product-modal").classList.remove("flex");
+  }
+  
+  //carrossel modal
+let modalImages = [];
+  let currentImageIndex = 0;
+
+  function openModal(name, images, description, price) {
+    document.getElementById("modal-title").innerText = name;
+    modalImages = images;
+    currentImageIndex = 0;
+    document.getElementById("modal-image").src = modalImages[currentImageIndex];
+    
+    document.getElementById("modal-description").innerHTML = description.replace(/\n/g, "<br>");
+    document.getElementById("modal-price").innerText = `R$ ${price.toFixed(2)}`;
+    document.getElementById("modal-buy").onclick = function() {
+      addToCart(name, price, description, modalImages[0], true);
+    };
+
+    document.getElementById("product-modal").classList.remove("hidden");
+    document.getElementById("product-modal").classList.add("flex");
+  }
+
+  function closeModal() {
+    document.getElementById("product-modal").classList.add("hidden");
+    document.getElementById("product-modal").classList.remove("flex");
+  }
+
+  function nextModalImage() {
+    if (modalImages.length > 1) {
+      currentImageIndex = (currentImageIndex + 1) % modalImages.length;
+      document.getElementById("modal-image").src = modalImages[currentImageIndex];
+    }
+  }
+
+  function prevModalImage() {
+    if (modalImages.length > 1) {
+      currentImageIndex = (currentImageIndex - 1 + modalImages.length) % modalImages.length;
+      document.getElementById("modal-image").src = modalImages[currentImageIndex];
+    }
+  }
+
+  window.onload = updateCartCount;
+</script>
+
+</body>
+</html>
